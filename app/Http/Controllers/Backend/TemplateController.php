@@ -17,7 +17,9 @@ class TemplateController extends Controller
      */
     public function index()
     {
-        return view('backend.template.dashboard');
+        $userlog = Userlog::get();
+        // dd($userlog);
+        return view('backend.template.dashboard', compact('userlog'));
     }
 
     /**

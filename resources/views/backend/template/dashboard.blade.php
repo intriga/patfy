@@ -2,9 +2,9 @@
 
 {{-- Customize layout sections --}}
 
-@section('subtitle', 'Welcome')
+@section('subtitle', 'Template')
 @section('content_header_title', 'Home')
-@section('content_header_subtitle', 'Welcome')
+@section('content_header_subtitle', 'Template')
 
 {{-- Content body: main page content --}}
 
@@ -24,21 +24,27 @@
                         <table id="example1" class="table table-bordered table-hover">
                             <thead>
                                 <tr>
-                                    <th>Datetime</th>
-                                    <th>Ip</th>
-                                    <th>Country</th>
-                                    <th>User Agent</th>
-                                    <th>More</th>
+                                    <th>Fecha</th>
+                                    <th>Direccion Ip</th>
+                                    <th>Sistema Operativo</th>
+                                    <th>Navegador</th>
+                                    <th>Pais</th>
+                                    <th>Ciudad</th>
+                                    <th>Provedor Isp</th>
                                 </tr>
                             </thead>
                             <tbody>
+                                @foreach ($userlog as $log)
                                 <tr>
-                                    <td>24-10-2024</td>
-                                    <td>192.168.1.1</td>
-                                    <td>venezuela</td>
-                                    <td>linux</td>
-                                    <td>more</td>
+                                    <td>{{ $log->created_at }}</td>
+                                    <td>{{ $log->ip }}</td>
+                                    <td>{{ $log->os }}</td>
+                                    <td>{{ $log->browser }}</td>
+                                    <td>{{ $log->country }}</td>
+                                    <td>{{ $log->city }}</td>
+                                    <td>{{ $log->isp }}</td>
                                 </tr>
+                                @endforeach
                             </tbody>
                                     
                         </table>
@@ -66,10 +72,15 @@
     <script src="https://cdn.datatables.net/2.1.8/js/dataTables.bootstrap5.min.js"></script>
 
     <script>
-  $(function () {
-    $("#example1").DataTable({
-      "responsive": true, "lengthChange": false, "autoWidth": false, "searching": true,
-    }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');    
-  });
-</script>
+    $(function () {
+        $("#example1").DataTable({
+        "responsive": true, 
+        "lengthChange": false, 
+        "autoWidth": false, 
+        "searching": true,
+        "order": [[0, "desc"]] // This line adds descending order on the first column
+        }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
+    });
+    </script>
+
 @endpush

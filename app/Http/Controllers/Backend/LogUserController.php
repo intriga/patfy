@@ -67,27 +67,32 @@ class LogUserController extends Controller
      */
     public static function getBrowser() {
         $user_agent = $_SERVER['HTTP_USER_AGENT'];
-        //global $user_agent;
-        $browser        = "Unknown Browser";
+        $browser = "Unknown Browser";
         $browser_array = array(
-                                '/msie/i'      => 'Internet Explorer',
-                                '/firefox/i'   => 'Firefox',
-                                '/safari/i'    => 'Safari',
-                                '/chrome/i'    => 'Chrome',
-                                '/edge/i'      => 'Edge',
-                                '/opera/i'     => 'Opera',
-                                '/netscape/i'  => 'Netscape',
-                                '/maxthon/i'   => 'Maxthon',
-                                '/konqueror/i' => 'Konqueror',
-                                '/mobile/i'    => 'Browser Phone Default'
-                         );
+            '/msie/i'      => 'Internet Explorer',
+            '/firefox/i'   => 'Firefox',
+            '/safari/i'    => 'Safari',
+            '/chrome/i'    => 'Chrome',
+            '/edge/i'      => 'Edge',
+            '/opera/i'     => 'Opera',
+            '/netscape/i'  => 'Netscape',
+            '/maxthon/i'   => 'Maxthon',
+            '/konqueror/i' => 'Konqueror',
+            '/mobile/i'    => 'Phone Browser',
+            '/brave/i'     => 'Brave',
+            '/vivaldi/i'   => 'Vivaldi'
+        );
     
-        foreach ($browser_array as $regex => $value)
-            if (preg_match($regex, $user_agent))
+        foreach ($browser_array as $regex => $value) {
+            if (preg_match($regex, $user_agent)) {
                 $browser = $value;
+                break;
+            }
+        }
     
         return $browser;
     }
+    
 
     /**
      * 
